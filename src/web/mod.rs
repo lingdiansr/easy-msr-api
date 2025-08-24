@@ -1,5 +1,4 @@
 use crate::client::remote::RemoteApiClient;
-use crate::config::Config;
 use axum::Router;
 use utoipa_swagger_ui::SwaggerUi;
 
@@ -12,7 +11,7 @@ pub fn routes(client: RemoteApiClient) -> Router {
     use handler::{create_user, get_user};
 
     Router::new()
-        .route("/users/:id", get(get_user))
+        .route("/users/id", get(get_user))
         .route("/users", post(create_user))
         .with_state(client)
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", docs::api_doc()))

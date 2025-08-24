@@ -1,4 +1,4 @@
-use rust_wrapper_swagger::{client::remote::RemoteApiClient, config::Config, web};
+use msr_api_rs::{client::remote::RemoteApiClient, config::Config, web};
 use std::net::Ipv4Addr;
 
 #[tokio::main]

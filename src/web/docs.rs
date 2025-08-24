@@ -1,5 +1,5 @@
-use crate::web::dto::{CreateUserRequest, User};
-use crate::web::handler::{create_user, get_user};
+use crate::web::dto::*;
+use crate::web::handler::*;
 use utoipa::OpenApi;
 
 #[derive(OpenApi)]

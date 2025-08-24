@@ -1,5 +1,5 @@
 use crate::error::AppError;
-use crate::web::dto::{CreateUserRequest, User};
+use crate::web::dto::*;
 use reqwest::Client;
 
 #[derive(Clone)]

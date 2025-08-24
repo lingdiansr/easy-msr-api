@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-
+use utoipa::schema;
 #[derive(Serialize, Deserialize, utoipa::ToSchema)]
 pub struct User {
     pub id: i32,
@@ -10,11 +10,8 @@ pub struct User {
 pub struct CreateUserRequest {
     pub name: String,
 }
-use serde::{Deserialize, Serialize};
-use utoipa::ToSchema;
-
 /// 最外层
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
 pub struct SongResp {
     pub code: i32,
     #[serde(default)]
@@ -23,7 +20,7 @@ pub struct SongResp {
 }
 
 /// data 字段
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
 pub struct SongData {
     #[serde(rename = "cid")]
     pub id: String,
