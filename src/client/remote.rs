@@ -39,4 +39,16 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+
+    pub async fn get_album(&self, id: String) -> Result<AlbumResp, AppError> {
+        let url = format!("{}/album/{}/data", self.base, id);
+        Ok(self
+            .inner
+            .get(&url)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await?)
+    }
 }

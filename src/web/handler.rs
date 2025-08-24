@@ -4,7 +4,6 @@ use crate::web::dto::*;
 use axum::{
     Json,
     extract::{Path, State},
-    http::StatusCode,
 };
 
 #[utoipa::path(
@@ -37,4 +36,22 @@ pub async fn get_all_songs(
     State(client): State<RemoteApiClient>,
 ) -> Result<Json<AllSongsResp>, AppError> {
     client.get_all_songs().await.map(Json)
+}
+
+#[utoipa::path(
+    get,
+    path="/album/{cid}/data",
+    params(
+        ("cid"=String,Path,description="专辑cid")
+    ),
+    responses(
+        (status=200,description="专辑",body=AlbumResp)
+    ),
+    tag = "albums"
+)]
+pub async fn get_album(
+    Path(cid): Path<String>,
+    State(client): State<RemoteApiClient>,
+) -> Result<Json<AlbumResp>, AppError> {
+    client.get_album(cid).await.map(Json)
 }

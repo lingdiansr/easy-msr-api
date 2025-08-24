@@ -54,3 +54,28 @@ pub struct AllSongsData{
     pub auto_paly: String,
 }
 pub type AllSongsResp = ApiResp<AllSongsData>;
+
+
+// 专辑
+#[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
+pub struct AlbumData {
+    #[serde(rename = "cid")]
+    pub id: String,
+
+    pub name: String,
+
+    pub intro: String,
+
+    pub belong: String,
+
+    #[serde(rename = "coverUrl")]
+    pub cover_url: String,
+
+    #[serde(rename = "coverDeUrl")]
+    pub cover_de_url: String,
+
+    #[serde(rename = "artistes")] // 怎么还拼错单词了
+    pub artists: Vec<String>,
+}
+pub type AlbumResp = ApiResp<AlbumData>;
+
