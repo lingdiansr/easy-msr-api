@@ -14,6 +14,7 @@ pub fn routes(client: RemoteApiClient) -> Router {
         .route("/song/{cid}", get(get_song))
         .route("/songs", get(get_all_songs))
         .route("/album/{cid}/data", get(get_album))
+        .route("/album/{cid}/detail", get(handler::get_album_detail))
         .with_state(client)
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", docs::api_doc()))
 }

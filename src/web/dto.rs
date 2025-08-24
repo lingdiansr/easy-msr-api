@@ -79,3 +79,35 @@ pub struct AlbumData {
 }
 pub type AlbumResp = ApiResp<AlbumData>;
 
+// 专辑详情中歌曲列表单项
+#[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
+pub struct AlbumDetailSongItem {
+    #[serde(rename = "cid")]
+    pub id: String,
+
+    pub name: String,
+
+    #[serde(rename = "artistes")] // 绷，还是错的
+    pub artists: Vec<String>,
+}
+// 专辑详情
+#[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
+pub struct AlbumDetailData {
+    #[serde(rename = "cid")]
+    pub id: String,
+
+    pub name: String,
+
+    pub intro: String,
+
+    pub belong: String,
+
+    #[serde(rename = "coverUrl")]
+    pub cover_url: String,
+
+    #[serde(rename = "coverDeUrl")]
+    pub cover_de_url: String,
+
+    pub songs: Vec<AlbumDetailSongItem>,
+}
+pub type AlbumDetailResp = ApiResp<AlbumDetailData>;

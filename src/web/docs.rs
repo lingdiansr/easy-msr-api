@@ -4,7 +4,7 @@ use utoipa::OpenApi;
 
 #[derive(OpenApi)]
 #[openapi(
-    paths(get_song, get_all_songs, get_album),
+    paths(get_song, get_all_songs, get_album, get_album_detail),
     components(schemas( 
         SongResp, 
         SongData, 
@@ -12,7 +12,10 @@ use utoipa::OpenApi;
         AllSongsItem, 
         AllSongsData, 
         AlbumResp, 
-        AlbumData 
+        AlbumData,
+        AlbumDetailResp,
+        AlbumDetailSongItem,
+        AlbumDetailData
     )),
     tags(
         (name = "songs", description = "歌曲相关接口"),
