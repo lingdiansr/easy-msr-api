@@ -1,15 +1,6 @@
 use serde::{Deserialize, Serialize};
 use utoipa::schema;
-#[derive(Serialize, Deserialize, utoipa::ToSchema)]
-pub struct User {
-    pub id: i32,
-    pub name: String,
-}
 
-#[derive(Serialize, Deserialize, utoipa::ToSchema)]
-pub struct CreateUserRequest {
-    pub name: String,
-}
 /// 响应体
 #[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
 pub struct ApiResp<T> {

@@ -4,10 +4,10 @@ use utoipa::OpenApi;
 
 #[derive(OpenApi)]
 #[openapi(
-    paths(get_user, create_user, get_song),
-    components(schemas(User, CreateUserRequest,SongResp,SongData)),
+    paths(get_song),
+    components(schemas( SongResp, SongData)),
     tags(
-        (name = "users", description = "用户管理接口")
+        (name = "songs", description = "歌曲相关接口"),
     )
 )]
 struct ApiDoc;
