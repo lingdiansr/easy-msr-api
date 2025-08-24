@@ -16,8 +16,20 @@ impl RemoteApiClient {
         }
     }
 
-    pub async fn get_song(&self, id: i32) -> Result<SongResp, AppError> {
+    pub async fn get_song(&self, id: String) -> Result<SongResp, AppError> {
         let url = format!("{}/song/{}", self.base, id);
+        Ok(self
+            .inner
+            .get(&url)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await?)
+    }
+
+    pub async fn get_all_songs(&self) -> Result<AllSongsResp, AppError> {
+        let url = format!("{}/songs", self.base);
         Ok(self
             .inner
             .get(&url)

@@ -11,7 +11,7 @@ use axum::{
     get,
     path="/song/{cid}",
     params(
-        ("cid"=i32,Path,description="歌曲cid")
+        ("cid"=String,Path,description="歌曲cid")
     ),
     responses(
         (status=200,description="歌曲",body=SongResp)
@@ -19,8 +19,22 @@ use axum::{
     tag = "songs"
 )]
 pub async fn get_song(
-    Path(cid): Path<i32>,
+    Path(cid): Path<String>,
     State(client): State<RemoteApiClient>,
 ) -> Result<Json<SongResp>, AppError> {
     client.get_song(cid).await.map(Json)
+}
+
+#[utoipa::path(
+    get,
+    path="/songs",
+    responses(
+        (status=200,description="所有歌曲列表",body=AllSongsResp)
+    ),
+    tag = "songs"
+)]
+pub async fn get_all_songs(
+    State(client): State<RemoteApiClient>,
+) -> Result<Json<AllSongsResp>, AppError> {
+    client.get_all_songs().await.map(Json)
 }

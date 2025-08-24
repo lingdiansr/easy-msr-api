@@ -35,3 +35,22 @@ pub struct SongData {
     pub artists: Vec<String>,
 }
 pub type SongResp = ApiResp<SongData>;
+
+// 所有歌曲列表单项
+#[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
+pub struct AllSongsItem {
+    #[serde(rename = "cid")]
+    pub id: String,
+    pub name: String,
+    #[serde(rename = "albumCid")]
+    pub album_id: String,
+    pub artists: Vec<String>,
+}
+// 所有歌曲列表
+#[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
+pub struct AllSongsData{
+    pub list: Vec<AllSongsItem>,
+    #[serde(rename = "autoplay")]
+    pub auto_paly: String,
+}
+pub type AllSongsResp = ApiResp<AllSongsData>;
