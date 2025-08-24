@@ -10,16 +10,16 @@ pub struct User {
 pub struct CreateUserRequest {
     pub name: String,
 }
-/// 最外层
+/// 响应体
 #[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
-pub struct SongResp {
+pub struct ApiResp<T> {
     pub code: i32,
     #[serde(default)]
     pub msg: String,
-    pub data: SongData,
+    pub data: T,
 }
 
-/// data 字段
+/// 歌曲
 #[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
 pub struct SongData {
     #[serde(rename = "cid")]
@@ -43,3 +43,4 @@ pub struct SongData {
 
     pub artists: Vec<String>,
 }
+pub type SongResp = ApiResp<SongData>;

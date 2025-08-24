@@ -40,8 +40,15 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
-    pub async fn get_song(&self, id: &str) -> Result<SongResp, AppError> {
+    pub async fn get_song(&self, id: i32) -> Result<SongResp, AppError> {
         let url = format!("{}/song/{}", self.base, id);
-        Ok(self.inner.get(&url).send().await?.json().await?)
+        Ok(self
+            .inner
+            .get(&url)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await?)
     }
 }

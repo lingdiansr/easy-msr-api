@@ -1,10 +1,10 @@
 use crate::client::remote::RemoteApiClient;
 use crate::error::AppError;
-use crate::web::dto::{CreateUserRequest, User};
+use crate::web::dto::*;
 use axum::{
+    Json,
     extract::{Path, State},
     http::StatusCode,
-    Json,
 };
 
 #[utoipa::path(
@@ -23,6 +23,22 @@ pub async fn get_user(
     State(client): State<RemoteApiClient>,
 ) -> Result<Json<User>, AppError> {
     client.get_user(id).await.map(Json)
+}
+#[utoipa::path(
+    get,
+    path="/song/{cid}",
+    params(
+        ("cid"=i32,Path,description="歌曲cid")
+    ),
+    responses(
+        (status=200,description="歌曲",body=SongResp)
+    )
+)]
+pub async fn get_song(
+    Path(cid): Path<i32>,
+    State(client): State<RemoteApiClient>,
+) -> Result<Json<SongResp>, AppError> {
+    client.get_song(cid).await.map(Json)
 }
 
 #[utoipa::path(
