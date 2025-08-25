@@ -73,3 +73,18 @@ pub async fn get_album_detail(
 ) -> Result<Json<AlbumDetailResp>, AppError> {
     client.get_album_detail(cid).await.map(Json)
 }
+
+
+#[utoipa::path(
+    get,
+    path="/albums",
+    responses(
+        (status=200,description="所有专辑列表",body=AllAlbumsResp)
+    ),
+    tag = "albums"
+)]
+pub async fn get_all_albums(
+    State(client): State<RemoteApiClient>,
+) -> Result<Json<AllAlbumsResp>, AppError> {
+    client.get_all_albums().await.map(Json)
+}

@@ -8,13 +8,14 @@ pub mod handler;
 
 pub fn routes(client: RemoteApiClient) -> Router {
     use axum::routing::get;
-    use handler::{get_song, get_all_songs, get_album};
+    use handler::*;
 
     Router::new()
         .route("/song/{cid}", get(get_song))
         .route("/songs", get(get_all_songs))
         .route("/album/{cid}/data", get(get_album))
-        .route("/album/{cid}/detail", get(handler::get_album_detail))
+        .route("/album/{cid}/detail", get(get_album_detail))
+        .route("/albums", get(get_all_albums))
         .with_state(client)
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", docs::api_doc()))
 }

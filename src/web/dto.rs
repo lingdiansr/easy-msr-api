@@ -111,3 +111,28 @@ pub struct AlbumDetailData {
     pub songs: Vec<AlbumDetailSongItem>,
 }
 pub type AlbumDetailResp = ApiResp<AlbumDetailData>;
+
+
+// 所有专辑列表单项
+#[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
+pub struct AllAlbumsItem {
+    #[serde(rename = "cid")]
+    pub id: String,
+    
+    pub name: String,
+
+    #[serde(rename = "coverUrl")]
+    pub cover_url: String,
+
+    #[serde(rename = "artistes")] // 还是错的
+    pub artists: Vec<String>,
+}
+
+// 所有专辑列表
+#[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
+pub struct AllAlbumsResp {
+    pub code: i32,
+    #[serde(default)]
+    pub msg: String,
+    pub data: Vec<AllAlbumsItem>,
+}
