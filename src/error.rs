@@ -8,15 +8,15 @@ use thiserror::Error;
 pub enum AppError {
     #[error("remote api error: {0}")]
     Remote(#[from] reqwest::Error),
-    #[error("invalid input")]
-    BadRequest,
+    #[error("invalid input: {0}")]
+    BadRequest(String),
 }
 
 impl IntoResponse for AppError {
     fn into_response(self) -> Response {
         let status = match self {
             AppError::Remote(_) => StatusCode::BAD_GATEWAY,
-            AppError::BadRequest => StatusCode::BAD_REQUEST,
+            AppError::BadRequest(_) => StatusCode::BAD_REQUEST,
         };
         (status, self.to_string()).into_response()
     }

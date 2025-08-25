@@ -3,7 +3,7 @@ use crate::error::AppError;
 use crate::web::dto::*;
 use axum::{
     Json,
-    extract::{Path, State},
+    extract::{Path, Query, State},
 };
 
 #[utoipa::path(
@@ -74,7 +74,6 @@ pub async fn get_album_detail(
     client.get_album_detail(cid).await.map(Json)
 }
 
-
 #[utoipa::path(
     get,
     path="/albums",
@@ -87,4 +86,27 @@ pub async fn get_all_albums(
     State(client): State<RemoteApiClient>,
 ) -> Result<Json<ApiResp<Vec<AllAlbumsItem>>>, AppError> {
     client.get_all_albums().await.map(Json)
+}
+
+#[utoipa::path(
+    get,
+    path="/search",
+    params(
+        ("keyword" = Option<String>, Query, description = "搜索关键词")
+    ),
+    responses(
+        (status=200,description="搜索结果",body=SearchResp)
+    ),
+    tag = "search"
+)]
+pub async fn search(
+    Query(q): Query<SearchQuery>,
+    State(client): State<RemoteApiClient>,
+) -> Result<Json<SearchResp>, AppError> {
+    match q.keyword {
+        Some(keyword) if !keyword.trim().is_empty() => {
+            client.search(keyword).await.map(Json)
+        },
+        _ => Err(AppError::BadRequest("Missing keyword".to_string())),
+    }
 }

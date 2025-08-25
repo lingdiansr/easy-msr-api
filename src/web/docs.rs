@@ -9,25 +9,38 @@ use utoipa::OpenApi;
         get_all_songs, 
         get_album, 
         get_album_detail,
-        get_all_albums
+        get_all_albums,
+        search,
     ),
     components(schemas( 
         SongResp, 
         SongData, 
+
         AllSongsResp, 
-        AllSongsItem, 
         AllSongsData, 
+        AllSongsItem, 
+
         AlbumResp, 
         AlbumData,
+
         AlbumDetailResp,
-        AlbumDetailSongItem,
         AlbumDetailData,
+        AlbumDetailSongItem,
+
         AllAlbumsItem,
+        
+        SearchResp,
+        SearchData,
+        SearchAlbumData,
+        SearchAlbumItem,
+        NewsData,
+        NewsItem,
         // AllAlbumsResp, 
     )),
     tags(
         (name = "songs", description = "歌曲相关接口"),
-        (name = "albums", description = "专辑相关接口")
+        (name = "albums", description = "专辑相关接口"),
+        (name = "search", description = "搜索相关接口"),
     )
 )]
 struct ApiDoc;

@@ -73,4 +73,15 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+    pub async fn search(&self, keyword: String) -> Result<SearchResp, AppError> {
+        let url = format!("{}/search?keyword={}", self.base, keyword);
+        Ok(self
+            .inner
+            .get(&url)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await?)
+    }
 }
