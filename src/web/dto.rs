@@ -129,10 +129,6 @@ pub struct AllAlbumsItem {
 }
 
 // 所有专辑列表
-#[derive(Serialize, Deserialize, Debug, utoipa::ToSchema)]
-pub struct AllAlbumsResp {
-    pub code: i32,
-    #[serde(default)]
-    pub msg: String,
-    pub data: Vec<AllAlbumsItem>,
-}
+// data字段下面直接是数组了，没法用类型别名
+// pub type AllAlbumsResp = ApiResp<Vec<AllAlbumsItem>>;
+

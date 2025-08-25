@@ -22,7 +22,8 @@ use utoipa::OpenApi;
         AlbumDetailResp,
         AlbumDetailSongItem,
         AlbumDetailData,
-        AllAlbumsResp, 
+        AllAlbumsItem,
+        // AllAlbumsResp, 
     )),
     tags(
         (name = "songs", description = "歌曲相关接口"),

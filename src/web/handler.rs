@@ -79,12 +79,12 @@ pub async fn get_album_detail(
     get,
     path="/albums",
     responses(
-        (status=200,description="所有专辑列表",body=AllAlbumsResp)
+        (status=200,description="所有专辑列表",body=ApiResp<Vec<AllAlbumsItem>>)
     ),
     tag = "albums"
 )]
 pub async fn get_all_albums(
     State(client): State<RemoteApiClient>,
-) -> Result<Json<AllAlbumsResp>, AppError> {
+) -> Result<Json<ApiResp<Vec<AllAlbumsItem>>>, AppError> {
     client.get_all_albums().await.map(Json)
 }
