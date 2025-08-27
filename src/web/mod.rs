@@ -17,6 +17,7 @@ pub fn routes(client: RemoteApiClient) -> Router {
         .route("/album/{cid}/detail", get(get_album_detail))
         .route("/albums", get(get_all_albums))
         .route("/news", get(get_all_news))
+        .route("/news/{cid}", get(get_news_detail))
         .route("/search", get(search))
         .route("/search/album", get(search_albums))
         .route("/search/news", get(search_news))

@@ -201,3 +201,21 @@ pub struct SearchQuery {
     pub keyword: String,
 }
 pub type SearchResp = ApiResp<SearchData>;
+
+
+#[derive(Serialize, Deserialize, Debug, ToSchema)]
+pub struct NewsDetailData {
+    #[serde(rename = "cid")]
+    pub id: String,
+
+    pub title: String,
+
+    pub cate: i32,
+
+    pub author: String,
+
+    pub content: String,
+
+    pub date: String,
+}
+pub type NewsDetailResp = ApiResp<NewsDetailData>;

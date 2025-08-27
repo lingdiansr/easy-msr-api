@@ -11,6 +11,7 @@ use utoipa::OpenApi;
         get_album_detail,
         get_all_albums,
         get_all_news,
+        get_news_detail,
         search,
         search_albums,
         search_news,
@@ -41,6 +42,9 @@ use utoipa::OpenApi;
 
         SearchAlbumResp,
         SearchNewsResp,
+
+        NewsDetailData,
+        NewsDetailResp,
     )),
     tags(
         (name = "songs", description = "歌曲相关接口"),
