@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use utoipa::{schema, IntoParams, ToSchema};
+use utoipa::{IntoParams, ToSchema, schema};
 
 // 响应体
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
@@ -152,6 +152,13 @@ pub struct SearchAlbumData {
     pub list: Vec<SearchAlbumItem>,
     pub end: bool,
 }
+#[derive(Serialize, Deserialize, Debug, IntoParams)]
+pub struct SearchAlbumQuery {
+    pub keyword: String,
+    #[serde(rename = "lastCid")]
+    pub last_cid: Option<String>,
+}
+pub type SearchAlbumResp = ApiResp<SearchAlbumData>;
 // 搜索结果中新闻列表单项
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct NewsItem {
@@ -173,12 +180,12 @@ pub struct NewsData {
 // 搜索结果
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct SearchData {
-    pub albums:SearchAlbumData,
+    pub albums: SearchAlbumData,
     pub news: NewsData,
 }
 // 查询参数结构体
 #[derive(Serialize, Deserialize, Debug, IntoParams)]
 pub struct SearchQuery {
-    pub keyword: Option<String>,
+    pub keyword: String,
 }
 pub type SearchResp = ApiResp<SearchData>;

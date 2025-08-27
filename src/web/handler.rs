@@ -92,7 +92,7 @@ pub async fn get_all_albums(
     get,
     path="/search",
     params(
-        ("keyword" = Option<String>, Query, description = "搜索关键词")
+        ("keyword" = String, Query, description = "搜索关键词")
     ),
     responses(
         (status=200,description="搜索结果",body=SearchResp)
@@ -103,10 +103,23 @@ pub async fn search(
     Query(q): Query<SearchQuery>,
     State(client): State<RemoteApiClient>,
 ) -> Result<Json<SearchResp>, AppError> {
-    match q.keyword {
-        Some(keyword) if !keyword.trim().is_empty() => {
-            client.search(keyword).await.map(Json)
-        },
-        _ => Err(AppError::BadRequest("Missing keyword".to_string())),
-    }
+    client.search(q.keyword).await.map(Json)
+}
+#[utoipa::path(
+    get,
+    path="/search/album",
+    params(
+        ("keyword"=String,Query,description="搜索专辑关键词"),
+        ("lastCid"=Option<String>,Query,description="从该项之后加载")
+    ),
+    responses(
+        (status=200,description="搜索专辑结果",body=SearchAlbumResp)
+    ),
+    tags=["search","albums"],
+)]
+pub async fn search_album(
+    Query(q): Query<SearchAlbumQuery>,
+    State(client): State<RemoteApiClient>,
+) -> Result<Json<SearchAlbumResp>, AppError> {
+    client.search_album(q.keyword, q.last_cid).await.map(Json)
 }

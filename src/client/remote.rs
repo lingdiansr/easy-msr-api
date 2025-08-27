@@ -84,4 +84,24 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+    pub async fn search_album(
+        &self,
+        keyword: String,
+        last_cid: Option<String>,
+    ) -> Result<SearchAlbumResp, AppError> {
+        let url = format!("{}/search/album?keyword={}", self.base, keyword);
+        let url = if let Some(ref cid) = last_cid {
+            format!("{}&lastCid={}", url, cid)
+        } else {
+            url
+        };
+        Ok(self
+            .inner
+            .get(&url)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await?)
+    }
 }
