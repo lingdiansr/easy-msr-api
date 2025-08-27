@@ -73,6 +73,22 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+    pub async fn get_all_news(&self, last_cid: Option<String>)-> Result<SearchNewsResp, AppError> {
+        let url = format!("{}/news", self.base);
+        let url = if let Some(ref cid) = last_cid {
+            format!("{}?lastCid={}", url, cid)
+        } else {
+            url
+        };
+        Ok(self
+            .inner
+            .get(&url)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await?)
+    }
     pub async fn search(&self, keyword: String) -> Result<SearchResp, AppError> {
         let url = format!("{}/search?keyword={}", self.base, keyword);
         Ok(self
@@ -84,12 +100,32 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
-    pub async fn search_album(
+    pub async fn search_albums(
         &self,
         keyword: String,
         last_cid: Option<String>,
     ) -> Result<SearchAlbumResp, AppError> {
         let url = format!("{}/search/album?keyword={}", self.base, keyword);
+        let url = if let Some(ref cid) = last_cid {
+            format!("{}&lastCid={}", url, cid)
+        } else {
+            url
+        };
+        Ok(self
+            .inner
+            .get(&url)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await?)
+    }
+    pub async fn search_news(
+        &self,
+        keyword: String,
+        last_cid: Option<String>,
+    ) -> Result<SearchNewsResp, AppError> {
+        let url = format!("{}/search/news?keyword={}", self.base, keyword);
         let url = if let Some(ref cid) = last_cid {
             format!("{}&lastCid={}", url, cid)
         } else {

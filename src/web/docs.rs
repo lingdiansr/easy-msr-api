@@ -10,8 +10,10 @@ use utoipa::OpenApi;
         get_album, 
         get_album_detail,
         get_all_albums,
+        get_all_news,
         search,
-        search_album,
+        search_albums,
+        search_news,
     ),
     components(schemas( 
         SongResp, 
@@ -38,11 +40,13 @@ use utoipa::OpenApi;
         NewsItem,
 
         SearchAlbumResp,
+        SearchNewsResp,
     )),
     tags(
         (name = "songs", description = "歌曲相关接口"),
         (name = "albums", description = "专辑相关接口"),
         (name = "search", description = "搜索相关接口"),
+        (name = "news", description = "新闻(动向)相关接口"),
     )
 )]
 struct ApiDoc;

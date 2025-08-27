@@ -177,6 +177,18 @@ pub struct NewsData {
     pub list: Vec<NewsItem>,
     pub end: bool,
 }
+#[derive(Serialize, Deserialize, Debug, IntoParams)]
+pub struct NewsQuery {
+    pub keyword: String,
+    #[serde(rename = "lastCid")]
+    pub last_cid: Option<String>,
+}
+#[derive(Serialize, Deserialize, Debug, IntoParams)]
+pub struct AllNewsQuery {
+    #[serde(rename = "lastCid")]
+    pub last_cid: Option<String>,
+}
+pub type SearchNewsResp = ApiResp<NewsData>;
 // 搜索结果
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct SearchData {

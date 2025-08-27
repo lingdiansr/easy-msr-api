@@ -117,9 +117,46 @@ pub async fn search(
     ),
     tags=["search","albums"],
 )]
-pub async fn search_album(
+pub async fn search_albums(
     Query(q): Query<SearchAlbumQuery>,
     State(client): State<RemoteApiClient>,
 ) -> Result<Json<SearchAlbumResp>, AppError> {
-    client.search_album(q.keyword, q.last_cid).await.map(Json)
+    client.search_albums(q.keyword, q.last_cid).await.map(Json)
+}
+
+#[utoipa::path(
+    get,
+    path="/search/news",
+    params(
+        ("keyword" = String, Query, description = "新闻关键词"),
+        ("lastCid" = Option<String>, Query, description = "从该项之后加载")
+    ),
+    responses(
+        (status=200,description="新闻列表",body=SearchNewsResp)
+    ),
+    tags =[ "news","search"],
+)]
+pub async fn search_news(
+    Query(q): Query<NewsQuery>,
+    State(client): State<RemoteApiClient>,
+) -> Result<Json<SearchNewsResp>, AppError> {
+    client.search_news(q.keyword, q.last_cid).await.map(Json)
+}
+
+#[utoipa::path(
+    get,
+    path="/news",
+    params(
+        ("lastCid" = Option<String>, Query, description = "从该项之后加载")
+    ),
+    responses(
+        (status=200,description="新闻列表",body=SearchNewsResp)
+    ),
+    tags =["news"],
+)]
+pub async fn get_all_news(
+    Query(q): Query<AllNewsQuery>,
+    State(client): State<RemoteApiClient>,
+) -> Result<Json<SearchNewsResp>, AppError> {
+    client.get_all_news(q.last_cid).await.map(Json)
 }
