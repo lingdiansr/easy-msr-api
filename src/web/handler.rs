@@ -13,7 +13,7 @@ use axum::{
         ("cid"=String,Path,description="歌曲cid")
     ),
     responses(
-        (status=200,description="歌曲",body=SongResp)
+        (status=200,description="歌曲",body=ApiResp<SongData>)
     ),
     tag = "songs"
 )]
@@ -28,7 +28,7 @@ pub async fn get_song(
     get,
     path="/songs",
     responses(
-        (status=200,description="所有歌曲列表",body=AllSongsResp)
+        (status=200,description="所有歌曲列表",body=ApiResp<AllSongsData>)
     ),
     tag = "songs"
 )]
@@ -45,7 +45,7 @@ pub async fn get_all_songs(
         ("cid"=String,Path,description="专辑cid")
     ),
     responses(
-        (status=200,description="专辑",body=AlbumResp)
+        (status=200,description="专辑",body=ApiResp<AlbumData>)
     ),
     tag = "albums"
 )]
@@ -63,7 +63,7 @@ pub async fn get_album(
         ("cid"=String,Path,description="专辑cid")
     ),
     responses(
-        (status=200,description="专辑详情",body=AlbumDetailResp)
+        (status=200,description="专辑详情",body=ApiResp<AlbumDetailData>)
     ),
     tag = "albums"
 )]
@@ -95,7 +95,7 @@ pub async fn get_all_albums(
         ("keyword" = String, Query, description = "搜索关键词")
     ),
     responses(
-        (status=200,description="搜索结果",body=SearchResp)
+        (status=200,description="搜索结果",body=ApiResp<SearchData>)
     ),
     tag = "search"
 )]
@@ -113,7 +113,7 @@ pub async fn search(
         ("lastCid"=Option<String>,Query,description="从该项之后加载")
     ),
     responses(
-        (status=200,description="搜索专辑结果",body=SearchAlbumResp)
+        (status=200,description="搜索专辑结果",body=ApiResp<SearchAlbumData>)
     ),
     tags=["search","albums"],
 )]
@@ -132,7 +132,7 @@ pub async fn search_albums(
         ("lastCid" = Option<String>, Query, description = "从该项之后加载")
     ),
     responses(
-        (status=200,description="新闻列表",body=SearchNewsResp)
+        (status=200,description="新闻列表",body=ApiResp<NewsData>)
     ),
     tags =[ "news","search"],
 )]
@@ -150,7 +150,7 @@ pub async fn search_news(
         ("lastCid" = Option<String>, Query, description = "从该项之后加载")
     ),
     responses(
-        (status=200,description="新闻列表",body=SearchNewsResp)
+        (status=200,description="新闻列表",body=ApiResp<NewsData>)
     ),
     tags =["news"],
 )]
@@ -168,7 +168,7 @@ pub async fn get_all_news(
         ("cid"=String,Path,description="新闻cid")
     ),
     responses(
-        (status=200,description="新闻详情",body=NewsDetailResp)
+        (status=200,description="新闻详情",body=ApiResp<NewsDetailData>)
     ),
     tag = "news"
 )]
@@ -189,6 +189,6 @@ pub async fn get_news_detail(
 )]
 pub async fn get_font(
     State(client): State<RemoteApiClient>
-)->Result<Json<ApiResp<FontData>>,AppError>{
+)->Result<Json<FontResp>,AppError>{
     client.get_font().await.map(Json)
 }

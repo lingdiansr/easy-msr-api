@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use utoipa::{openapi::schema, schema, IntoParams, ToSchema};
+use utoipa::{IntoParams, ToSchema, openapi::schema, schema};
 
 // 响应体
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
@@ -15,9 +15,12 @@ pub struct ApiResp<T> {
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct SongData {
     #[serde(rename = "cid")]
+    #[schema(value_type = String,example="953953")]
     pub id: String,
+    #[schema(value_type=String,example="Little Wish")]
     pub name: String,
     #[serde(rename = "albumCid")]
+    #[schema(value_type=String,example="3888")]
     pub album_id: String,
 
     #[serde(rename = "sourceUrl")]
@@ -25,6 +28,7 @@ pub struct SongData {
     pub source_url: Option<String>,
 
     #[serde(rename = "lyricUrl")]
+    #[schema(value_type=String,example="https://web.hycdn.cn/siren/lyric/xxx/xxx.lrc")]
     pub lyric_url: Option<String>,
 
     #[serde(rename = "mvUrl")]
@@ -41,9 +45,12 @@ pub type SongResp = ApiResp<SongData>;
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct AllSongsItem {
     #[serde(rename = "cid")]
+    #[schema(value_type = String,example="953953")]
     pub id: String,
+    #[schema(value_type=String,example="Little Wish")]
     pub name: String,
     #[serde(rename = "albumCid")]
+    #[schema(value_type=String,example="3888")]
     pub album_id: String,
     pub artists: Vec<String>,
 }
@@ -52,6 +59,7 @@ pub struct AllSongsItem {
 pub struct AllSongsData {
     pub list: Vec<AllSongsItem>,
     #[serde(rename = "autoplay")]
+    #[schema(value_type=String,example="048794")]
     pub auto_paly: String,
 }
 pub type AllSongsResp = ApiResp<AllSongsData>;
@@ -60,18 +68,21 @@ pub type AllSongsResp = ApiResp<AllSongsData>;
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct AlbumData {
     #[serde(rename = "cid")]
+    #[schema(value_type=String,example="3888")]
     pub id: String,
-
+    #[schema(value_type=String,example="Little Wish")]
     pub name: String,
-
+    #[schema(value_type=String,example="一触即碎的肥皂泡，也要托起小小愿望，飞越风雨，飞向太阳，绽放她的幻彩流光。")]
     pub intro: String,
-
+    #[schema(value_type=String,example="arknights")]
     pub belong: String,
 
     #[serde(rename = "coverUrl")]
+    #[schema(value_type=String,example="https://web.hycdn.cn/siren/pic/xxx/xxx.jpg")]
     pub cover_url: String,
 
     #[serde(rename = "coverDeUrl")]
+    #[schema(value_type=String,example="https://web.hycdn.cn/siren/pic/xxx/xxx.jpg")]
     pub cover_de_url: String,
 
     #[serde(rename = "artistes")] // 怎么还拼错单词了
@@ -83,8 +94,9 @@ pub type AlbumResp = ApiResp<AlbumData>;
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct AlbumDetailSongItem {
     #[serde(rename = "cid")]
+    #[schema(value_type = String,example="953953")]
     pub id: String,
-
+    #[schema(value_type=String,example="Little Wish")]
     pub name: String,
 
     #[serde(rename = "artistes")] // 绷，还是错的
@@ -94,18 +106,21 @@ pub struct AlbumDetailSongItem {
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct AlbumDetailData {
     #[serde(rename = "cid")]
+    #[schema(value_type = String,example="953953")]
     pub id: String,
-
+    #[schema(value_type=String,example="Little Wish")]
     pub name: String,
-
+    #[schema(value_type=String,example="一触即碎的肥皂泡，也要托起小小愿望，飞越风雨，飞向太阳，绽放她的幻彩流光。")]
     pub intro: String,
-
+    #[schema(value_type=String,example="arknights")]
     pub belong: String,
 
     #[serde(rename = "coverUrl")]
+    #[schema(value_type=String,example="https://web.hycdn.cn/siren/pic/xxx/xxx.jpg")]
     pub cover_url: String,
 
     #[serde(rename = "coverDeUrl")]
+    #[schema(value_type=String,example="https://web.hycdn.cn/siren/pic/xxx/xxx.jpg")]
     pub cover_de_url: String,
 
     pub songs: Vec<AlbumDetailSongItem>,
@@ -116,11 +131,13 @@ pub type AlbumDetailResp = ApiResp<AlbumDetailData>;
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct AllAlbumsItem {
     #[serde(rename = "cid")]
+    #[schema(value_type=String,example="3888")]
     pub id: String,
-
+    #[schema(value_type=String,example="Little Wish")]
     pub name: String,
 
     #[serde(rename = "coverUrl")]
+    #[schema(value_type=String,example="https://web.hycdn.cn/siren/pic/xxx/xxx.jpg")]
     pub cover_url: String,
 
     #[serde(rename = "artistes")] // 还是错的
@@ -135,13 +152,16 @@ pub struct AllAlbumsItem {
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct SearchAlbumItem {
     #[serde(rename = "cid")]
+    #[schema(value_type=String,example="3888")]
     pub id: String,
-
+    #[schema(value_type=String,example="Little Wish")]
     pub name: String,
 
+    #[schema(value_type=String,example="arknights")]
     pub belong: String,
 
     #[serde(rename = "coverUrl")]
+    #[schema(value_type=String,example="https://web.hycdn.cn/siren/pic/xxx/xxx.jpg")]
     pub cover_url: String,
 
     #[serde(rename = "artistes")] // 还是错的
