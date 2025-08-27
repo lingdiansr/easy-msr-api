@@ -73,7 +73,7 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
-    pub async fn get_all_news(&self, last_cid: Option<String>)-> Result<SearchNewsResp, AppError> {
+    pub async fn get_all_news(&self, last_cid: Option<String>) -> Result<SearchNewsResp, AppError> {
         let url = format!("{}/news", self.base);
         let url = if let Some(ref cid) = last_cid {
             format!("{}?lastCid={}", url, cid)
@@ -91,6 +91,17 @@ impl RemoteApiClient {
     }
     pub async fn get_news_detail(&self, id: String) -> Result<NewsDetailResp, AppError> {
         let url = format!("{}/news/{}", self.base, id);
+        Ok(self
+            .inner
+            .get(&url)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await?)
+    }
+    pub async fn get_font(&self) -> Result<FontResp, AppError> {
+        let url = format!("{}/fontset", self.base);
         Ok(self
             .inner
             .get(&url)

@@ -168,7 +168,7 @@ pub async fn get_all_news(
         ("cid"=String,Path,description="新闻cid")
     ),
     responses(
-        (status=200,description="新闻详情",body=ApiResp<NewsDetailData>)
+        (status=200,description="新闻详情",body=NewsDetailResp)
     ),
     tag = "news"
 )]
@@ -177,4 +177,18 @@ pub async fn get_news_detail(
     State(client): State<RemoteApiClient>,
 ) -> Result<Json<NewsDetailResp>, AppError> {   
     client.get_news_detail(cid).await.map(Json)
+}
+
+#[utoipa::path(
+    get,
+    path="/fontset",
+    responses(
+        (status=200,description="字体文件",body=ApiResp<FontData>)
+    ),
+    tag = "others"
+)]
+pub async fn get_font(
+    State(client): State<RemoteApiClient>
+)->Result<Json<ApiResp<FontData>>,AppError>{
+    client.get_font().await.map(Json)
 }

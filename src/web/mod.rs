@@ -21,6 +21,7 @@ pub fn routes(client: RemoteApiClient) -> Router {
         .route("/search", get(search))
         .route("/search/album", get(search_albums))
         .route("/search/news", get(search_news))
+        .route("/fontset", get(get_font))
         .with_state(client)
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", docs::api_doc()))
 }

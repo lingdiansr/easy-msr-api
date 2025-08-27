@@ -1,0 +1,18 @@
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "Sans-Regular": {
+      "tt": "https://web.hycdn.cn/arknights/fonts/sans-regular.ttf",
+      "eot": "https://web.hycdn.cn/arknights/fonts/sans-regular.eot",
+      "svg": "https://web.hycdn.cn/arknights/fonts/sans-regular.svg",
+      "woff": "https://web.hycdn.cn/arknights/fonts/sans-regular.woff"
+    },
+    "Sans-Bold": {
+      "tt": "https://web.hycdn.cn/arknights/fonts/sans-bold.ttf",
+      "eot": "https://web.hycdn.cn/arknights/fonts/sans-bold.eot",
+      "svg": "https://web.hycdn.cn/arknights/fonts/sans-bold.svg",
+      "woff": "https://web.hycdn.cn/arknights/fonts/sans-bold.woff"
+    }
+  }
+}

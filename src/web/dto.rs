@@ -1,11 +1,12 @@
 use serde::{Deserialize, Serialize};
-use utoipa::{IntoParams, ToSchema, schema};
+use utoipa::{openapi::schema, schema, IntoParams, ToSchema};
 
 // 响应体
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct ApiResp<T> {
+    #[schema(value_type = i32, example = 0)]
     pub code: i32,
-    #[serde(default)]
+    #[schema(value_type = String, example = "")]
     pub msg: String,
     pub data: T,
 }
@@ -202,7 +203,6 @@ pub struct SearchQuery {
 }
 pub type SearchResp = ApiResp<SearchData>;
 
-
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct NewsDetailData {
     #[serde(rename = "cid")]
@@ -219,3 +219,19 @@ pub struct NewsDetailData {
     pub date: String,
 }
 pub type NewsDetailResp = ApiResp<NewsDetailData>;
+
+#[derive(Serialize, Deserialize, Debug, ToSchema)]
+pub struct FontItem {
+    pub tt: String,
+    pub eot: String,
+    pub svg: String,
+    pub woff: String,
+}
+#[derive(Serialize, Deserialize, Debug, ToSchema)]
+pub struct FontData {
+    #[serde(rename = "Sans-Regular")]
+    pub sans_regular: FontItem,
+    #[serde(rename = "Sans-Bold")]
+    pub sans_bold: FontItem,
+}
+pub type FontResp = ApiResp<FontData>;

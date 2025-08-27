@@ -12,6 +12,7 @@ use utoipa::OpenApi;
         get_all_albums,
         get_all_news,
         get_news_detail,
+        get_font,
         search,
         search_albums,
         search_news,
@@ -45,12 +46,16 @@ use utoipa::OpenApi;
 
         NewsDetailData,
         NewsDetailResp,
+        
+        FontData,
+        FontItem,
     )),
     tags(
+        (name = "search", description = "搜索相关接口"),
         (name = "songs", description = "歌曲相关接口"),
         (name = "albums", description = "专辑相关接口"),
-        (name = "search", description = "搜索相关接口"),
         (name = "news", description = "新闻(动向)相关接口"),
+        (name = "others",description="其他接口")
     )
 )]
 struct ApiDoc;
