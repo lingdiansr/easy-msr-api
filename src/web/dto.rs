@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use utoipa::{IntoParams, ToSchema, openapi::schema, schema};
+use utoipa::{IntoParams, ToSchema, schema};
 
 // 响应体
 #[derive(Serialize, Deserialize, Debug, ToSchema)]

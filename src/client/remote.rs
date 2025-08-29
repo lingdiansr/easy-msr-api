@@ -51,6 +51,7 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+
     pub async fn get_album_detail(&self, id: String) -> Result<AlbumDetailResp, AppError> {
         let url = format!("{}/album/{}/detail", self.base, id);
         Ok(self
@@ -62,6 +63,7 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+
     pub async fn get_all_albums(&self) -> Result<ApiResp<Vec<AllAlbumsItem>>, AppError> {
         let url = format!("{}/albums", self.base);
         Ok(self
@@ -73,6 +75,7 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+
     pub async fn get_all_news(&self, last_cid: Option<String>) -> Result<SearchNewsResp, AppError> {
         let url = format!("{}/news", self.base);
         let url = if let Some(ref cid) = last_cid {
@@ -89,6 +92,7 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+
     pub async fn get_news_detail(&self, id: String) -> Result<NewsDetailResp, AppError> {
         let url = format!("{}/news/{}", self.base, id);
         Ok(self
@@ -100,6 +104,7 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+
     pub async fn get_font(&self) -> Result<FontResp, AppError> {
         let url = format!("{}/fontset", self.base);
         Ok(self
@@ -111,6 +116,7 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+
     pub async fn search(&self, keyword: String) -> Result<SearchResp, AppError> {
         let url = format!("{}/search?keyword={}", self.base, keyword);
         Ok(self
@@ -122,6 +128,7 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+
     pub async fn search_albums(
         &self,
         keyword: String,
@@ -142,6 +149,7 @@ impl RemoteApiClient {
             .json()
             .await?)
     }
+
     pub async fn search_news(
         &self,
         keyword: String,
