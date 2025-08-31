@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
-use utoipa::{IntoParams, ToSchema, schema};
+use utoipa::{IntoParams, ToSchema};
 
-// 响应体
+/// 统一的API响应格式
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct ApiResp<T> {
     #[schema(value_type = i32, example = 0)]
@@ -9,6 +9,29 @@ pub struct ApiResp<T> {
     #[schema(value_type = String, example = "")]
     pub msg: String,
     pub data: T,
+}
+
+impl<T> ApiResp<T> {
+    /// 创建成功的响应
+    pub fn success(data: T) -> Self {
+        Self {
+            code: 0,
+            msg: String::new(),
+            data,
+        }
+    }
+    
+    /// 创建错误响应
+    pub fn error(msg: String) -> Self 
+    where
+        T: Default,
+    {
+        Self {
+            code: -1,
+            msg,
+            data: T::default(),
+        }
+    }
 }
 
 // 歌曲
