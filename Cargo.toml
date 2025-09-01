@@ -1,5 +1,5 @@
 [package]
-name = "msr-api-rs"
+name = "msr-api"
 version = "0.1.0"
 edition = "2024"
 

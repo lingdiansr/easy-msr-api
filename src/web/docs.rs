@@ -78,7 +78,7 @@ struct ApiDoc;
 /// # 示例
 /// 
 /// ```rust
-/// use msr_api_rs::web::docs::api_doc;
+/// use msr_api::web::docs::api_doc;
 /// 
 /// let openapi = api_doc();
 /// // 可以将此实例用于Swagger UI配置

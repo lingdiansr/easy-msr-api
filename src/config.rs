@@ -39,7 +39,7 @@ impl Config {
     /// # 示例
     /// 
     /// ```rust
-    /// use msr_api_rs::config::Config;
+    /// use msr_api::config::Config;
     /// 
     /// let config = Config::from_env().unwrap();
     /// println!("服务器端口: {}", config.server_port);
@@ -72,7 +72,7 @@ impl Config {
     /// # 示例
     /// 
     /// ```rust
-    /// use msr_api_rs::config::Config;
+    /// use msr_api::config::Config;
     /// 
     /// let config = Config::from_env().unwrap();
     /// let addr = config.server_addr();

@@ -32,7 +32,7 @@ impl RemoteApiClient {
     /// # 示例
     /// 
     /// ```rust
-    /// use msr_api_rs::client::remote::RemoteApiClient;
+    /// use msr_api::client::remote::RemoteApiClient;
     /// 
     /// let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
     /// ```
@@ -51,7 +51,7 @@ impl RemoteApiClient {
     /// 
     /// ```rust
     /// use std::time::Duration;
-    /// use msr_api_rs::client::remote::RemoteApiClient;
+    /// use msr_api::client::remote::RemoteApiClient;
     /// 
     /// let client = RemoteApiClient::with_config(
     ///     "https://monster-siren.hypergryph.com/api".to_string(),

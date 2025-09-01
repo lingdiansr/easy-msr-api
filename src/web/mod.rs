@@ -50,7 +50,7 @@ pub mod handler;
 /// # 示例
 /// 
 /// ```rust
-/// use msr_api_rs::{client::remote::RemoteApiClient, web};
+/// use msr_api::{client::remote::RemoteApiClient, web};
 /// use std::net::Ipv4Addr;
 /// 
 /// #[tokio::main]

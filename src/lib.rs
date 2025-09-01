@@ -13,7 +13,7 @@
 //! ### 1. 使用默认客户端(推荐)
 //! 
 //! ```rust
-//! use msr_api_rs::MSRApiClient;
+//! use msr_api::MSRApiClient;
 //! 
 //! #[tokio::main]
 //! async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -30,7 +30,7 @@
 //! ### 2. 作为库直接调用API
 //! 
 //! ```rust
-//! use msr_api_rs::client::remote::RemoteApiClient;
+//! use msr_api::client::remote::RemoteApiClient;
 //! 
 //! #[tokio::main]
 //! async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -47,7 +47,7 @@
 //! ### 3. 作为Web服务使用（需要启用web feature）
 //! 
 //! ```rust
-//! use msr_api_rs::{client::remote::RemoteApiClient, web};
+//! use msr_api::{client::remote::RemoteApiClient, web};
 //! use std::net::Ipv4Addr;
 //! 
 //! #[tokio::main]
@@ -103,7 +103,7 @@ impl MSRApiClient {
     /// # 示例
     /// 
     /// ```rust
-    /// use msr_api_rs::MSRApiClient;
+    /// use msr_api::MSRApiClient;
     /// 
     /// let client = MSRApiClient::new();
     /// ```
@@ -122,7 +122,7 @@ impl MSRApiClient {
     /// # 示例
     /// 
     /// ```rust
-    /// use msr_api_rs::MSRApiClient;
+    /// use msr_api::MSRApiClient;
     /// 
     /// let client = MSRApiClient::with_base("https://custom-api.com".to_string());
     /// ```
