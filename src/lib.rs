@@ -76,7 +76,8 @@
 //! - [`client`] - API客户端实现
 //! - [`config`] - 配置管理
 //! - [`error`] - 错误处理
-//! - [`web`] - Web路由层（需要启用web feature）
+//! - Web路由层（需要启用 `web` feature）
+#![cfg_attr(feature = "web", doc = "- [`web`] - Web 路由层")]
 
 pub mod client;
 pub mod config;
