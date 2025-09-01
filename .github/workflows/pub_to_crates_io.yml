@@ -36,15 +36,19 @@ jobs:
         id: auth
         uses: rust-lang/crates-io-auth-action@v1
 
-      # 4. 生成 Release Notes（使用 git-cliff，可按需替换）
+      # 4. 安装并运行 git-cliff
+      - name: Install git-cliff
+        run: cargo install git-cliff --locked
+
       - name: Generate Release Notes
         id: changelog
         run: |
-          curl -LsSf https://github.com/orhun/git-cliff/releases/latest/download/git-cliff-x86_64-unknown-linux-gnu.tar.gz | tar zxf -
-          ./git-cliff --latest --strip all > RELEASE_NOTES.md
-          echo "release_body<<EOF" >> $GITHUB_OUTPUT
-          cat RELEASE_NOTES.md >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          git cliff --latest --strip all > RELEASE_NOTES.md
+          {
+            echo 'release_body<<EOF'
+            cat RELEASE_NOTES.md
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
 
       # 5. 创建 GitHub Release
       - name: Create GitHub Release
