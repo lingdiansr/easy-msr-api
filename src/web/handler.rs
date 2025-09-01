@@ -15,7 +15,7 @@ use axum::{
 
 /// 获取歌曲详情
 /// 
-/// 根据歌曲CID获取歌曲的详细信息，包括音频文件URL、歌词URL等。
+/// 根据歌曲cid获取歌曲的详细信息，包括音频文件URL、歌词URL等。
 #[utoipa::path(
     get,
     path="/song/{cid}",
@@ -53,7 +53,7 @@ pub async fn get_all_songs(
 
 /// 获取专辑信息
 /// 
-/// 根据专辑CID获取专辑的基本信息。
+/// 根据专辑cid获取专辑的基本信息。
 #[utoipa::path(
     get,
     path="/album/{cid}/data",
@@ -74,7 +74,7 @@ pub async fn get_album(
 
 /// 获取专辑详情
 /// 
-/// 根据专辑CID获取专辑的详细信息，包括专辑中的所有歌曲列表。
+/// 根据专辑cid获取专辑的详细信息，包括专辑中的所有歌曲列表。
 #[utoipa::path(
     get,
     path="/album/{cid}/detail",
@@ -198,7 +198,7 @@ pub async fn get_all_news(
 
 /// 获取新闻详情
 /// 
-/// 根据新闻CID获取新闻的详细内容。
+/// 根据新闻cid获取新闻的详细内容。
 #[utoipa::path(
     get,
     path="/news/{cid}",

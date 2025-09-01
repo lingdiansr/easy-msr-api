@@ -55,7 +55,7 @@ pub mod handler;
 /// 
 /// #[tokio::main]
 /// async fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let client = RemoteApiClient::new("https://api.example.com".to_string());
+///     let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
 ///     let app = web::routes(client);
 ///     
 ///     // 启动服务器

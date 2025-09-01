@@ -34,7 +34,7 @@ impl RemoteApiClient {
     /// ```rust
     /// use msr_api_rs::client::remote::RemoteApiClient;
     /// 
-    /// let client = RemoteApiClient::new("https://api.example.com".to_string());
+    /// let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
     /// ```
     pub fn new(base: String) -> Self {
         Self::with_config(base, Duration::from_secs(30))
@@ -54,7 +54,7 @@ impl RemoteApiClient {
     /// use msr_api_rs::client::remote::RemoteApiClient;
     /// 
     /// let client = RemoteApiClient::with_config(
-    ///     "https://api.example.com".to_string(),
+    ///     "https://monster-siren.hypergryph.com/api".to_string(),
     ///     Duration::from_secs(60)
     /// );
     /// ```
@@ -107,7 +107,7 @@ impl RemoteApiClient {
     /// 
     /// # 参数
     /// 
-    /// * `id` - 歌曲的唯一标识符（CID）
+    /// * `id` - 歌曲的唯一标识符（cid）
     /// 
     /// # 返回
     /// 
@@ -129,7 +129,7 @@ impl RemoteApiClient {
     /// 
     /// # 参数
     /// 
-    /// * `id` - 专辑的唯一标识符（CID）
+    /// * `id` - 专辑的唯一标识符（cid）
     /// 
     /// # 返回
     /// 
@@ -142,7 +142,7 @@ impl RemoteApiClient {
     /// 
     /// # 参数
     /// 
-    /// * `id` - 专辑的唯一标识符（CID）
+    /// * `id` - 专辑的唯一标识符（cid）
     /// 
     /// # 返回
     /// 
@@ -164,7 +164,7 @@ impl RemoteApiClient {
     /// 
     /// # 参数
     /// 
-    /// * `last_cid` - 可选参数，用于分页，从指定CID之后开始获取
+    /// * `last_cid` - 可选参数，用于分页，从指定cid之后开始获取
     /// 
     /// # 返回
     /// 
@@ -181,7 +181,7 @@ impl RemoteApiClient {
     /// 
     /// # 参数
     /// 
-    /// * `id` - 新闻的唯一标识符（CID）
+    /// * `id` - 新闻的唯一标识符（cid）
     /// 
     /// # 返回
     /// 

@@ -86,7 +86,7 @@ impl<T> ApiResp<T> {
 /// 包含歌曲的完整信息，包括音频文件URL、歌词URL等。
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct SongData {
-    /// 歌曲唯一标识符（CID）
+    /// 歌曲唯一标识符（cid）
     #[serde(rename = "cid")]
     #[schema(value_type = String, example = "953953")]
     pub id: String,
@@ -95,7 +95,7 @@ pub struct SongData {
     #[schema(value_type = String, example = "Little Wish")]
     pub name: String,
     
-    /// 所属专辑CID
+    /// 所属专辑cid
     #[serde(rename = "albumCid")]
     #[schema(value_type = String, example = "3888")]
     pub album_id: String,
@@ -130,7 +130,7 @@ pub type SongResp = ApiResp<SongData>;
 /// 简化版的歌曲信息，用于列表展示。
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct AllSongsItem {
-    /// 歌曲唯一标识符（CID）
+    /// 歌曲唯一标识符（cid）
     #[serde(rename = "cid")]
     #[schema(value_type = String, example = "953953")]
     pub id: String,
@@ -139,7 +139,7 @@ pub struct AllSongsItem {
     #[schema(value_type = String, example = "Little Wish")]
     pub name: String,
     
-    /// 所属专辑CID
+    /// 所属专辑cid
     #[serde(rename = "albumCid")]
     #[schema(value_type = String, example = "3888")]
     pub album_id: String,
@@ -154,7 +154,7 @@ pub struct AllSongsData {
     /// 歌曲列表
     pub list: Vec<AllSongsItem>,
     
-    /// 自动播放的歌曲CID
+    /// 自动播放的歌曲cid
     #[serde(rename = "autoplay")]
     #[schema(value_type = String, example = "048794")]
     pub auto_paly: String,
@@ -168,7 +168,7 @@ pub type AllSongsResp = ApiResp<AllSongsData>;
 /// 包含专辑的基本信息。
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct AlbumData {
-    /// 专辑唯一标识符（CID）
+    /// 专辑唯一标识符（cid）
     #[serde(rename = "cid")]
     #[schema(value_type = String, example = "3888")]
     pub id: String,
@@ -208,7 +208,7 @@ pub type AlbumResp = ApiResp<AlbumData>;
 /// 专辑详情中包含的简化歌曲信息。
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct AlbumDetailSongItem {
-    /// 歌曲唯一标识符（CID）
+    /// 歌曲唯一标识符（cid）
     #[serde(rename = "cid")]
     #[schema(value_type = String, example = "953953")]
     pub id: String,
@@ -227,7 +227,7 @@ pub struct AlbumDetailSongItem {
 /// 包含专辑的完整信息和歌曲列表。
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct AlbumDetailData {
-    /// 专辑唯一标识符（CID）
+    /// 专辑唯一标识符（cid）
     #[serde(rename = "cid")]
     #[schema(value_type = String, example = "953953")]
     pub id: String,
@@ -266,7 +266,7 @@ pub type AlbumDetailResp = ApiResp<AlbumDetailData>;
 /// 简化版的专辑信息，用于列表展示。
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct AllAlbumsItem {
-    /// 专辑唯一标识符（CID）
+    /// 专辑唯一标识符（cid）
     #[serde(rename = "cid")]
     #[schema(value_type = String, example = "3888")]
     pub id: String,
@@ -290,7 +290,7 @@ pub struct AllAlbumsItem {
 /// 搜索结果中的专辑信息。
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct SearchAlbumItem {
-    /// 专辑唯一标识符（CID）
+    /// 专辑唯一标识符（cid）
     #[serde(rename = "cid")]
     #[schema(value_type = String, example = "3888")]
     pub id: String,
@@ -329,7 +329,7 @@ pub struct SearchAlbumQuery {
     /// 搜索关键词
     pub keyword: String,
     
-    /// 分页参数，从指定CID之后开始获取
+    /// 分页参数，从指定cid之后开始获取
     #[serde(rename = "lastCid")]
     pub last_cid: Option<String>,
 }
@@ -342,7 +342,7 @@ pub type SearchAlbumResp = ApiResp<SearchAlbumData>;
 /// 简化版的新闻信息，用于列表展示。
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct NewsItem {
-    /// 新闻唯一标识符（CID）
+    /// 新闻唯一标识符（cid）
     #[serde(rename = "cid")]
     pub id: String,
 
@@ -373,7 +373,7 @@ pub struct NewsQuery {
     /// 搜索关键词
     pub keyword: String,
     
-    /// 分页参数，从指定CID之后开始获取
+    /// 分页参数，从指定cid之后开始获取
     #[serde(rename = "lastCid")]
     pub last_cid: Option<String>,
 }
@@ -381,7 +381,7 @@ pub struct NewsQuery {
 /// 获取所有新闻查询参数
 #[derive(Serialize, Deserialize, Debug, IntoParams)]
 pub struct AllNewsQuery {
-    /// 分页参数，从指定CID之后开始获取
+    /// 分页参数，从指定cid之后开始获取
     #[serde(rename = "lastCid")]
     pub last_cid: Option<String>,
 }
@@ -416,7 +416,7 @@ pub type SearchResp = ApiResp<SearchData>;
 /// 包含新闻的完整内容。
 #[derive(Serialize, Deserialize, Debug, ToSchema)]
 pub struct NewsDetailData {
-    /// 新闻唯一标识符（CID）
+    /// 新闻唯一标识符（cid）
     #[serde(rename = "cid")]
     pub id: String,
 

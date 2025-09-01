@@ -7,6 +7,11 @@ edition = "2024"
 default = []
 web = ["dep:utoipa-swagger-ui"]
 
+[[bin]]
+name = "server"
+path = "src/bin/server.rs"
+required-features = ["web"]
+
 [dependencies]
 anyhow = "1.0.99"
 axum = "0.8.4"

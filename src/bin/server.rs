@@ -1,11 +1,6 @@
-#[cfg(feature = "web")]
 use msr_api_rs::{client::remote::RemoteApiClient, config::Config, web};
-#[cfg(feature = "web")]
 use tracing::info;
-#[cfg(feature = "web")]
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-
-#[cfg(feature = "web")] // 仅当启用了 web feature（即 Swagger UI）时才编译这段代码
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     // 初始化日志

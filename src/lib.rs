@@ -1,35 +1,16 @@
 //! # MSR API Rust 封装库
 //! 
-//! 这是一个为MSR API（明日方舟音乐API）提供Rust封装的库，支持直接API调用和Web服务集成。
+//! 这是一个为MSR API（明日方舟音乐API）提供Rust封装的库，支持直接API调用和Swagger-UI文档。
 //! 
 //! ## 功能特性
 //! 
 //! - **核心API封装**：完整的MSR API功能封装，可直接调用
 //! - **可选Web路由**：提供Axum Web路由集成，包含Swagger UI文档界面
 //! - **类型安全**：完整的DTO类型定义
-//! - **灵活使用**：支持直接API调用和Web服务两种模式
 //! 
 //! ## 使用方式
 //! 
-//! ### 1. 作为库直接调用API（推荐）
-//! 
-//! ```rust
-//! use msr_api_rs::client::remote::RemoteApiClient;
-//! 
-//! #[tokio::main]
-//! async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//!     // 创建API客户端
-//!     let client = RemoteApiClient::new("https://your-api-base.com".to_string());
-//!     
-//!     // 直接调用API方法
-//!     let song = client.get_song("123456".to_string()).await?;
-//!     println!("歌曲名称: {}", song.data.name);
-//!     
-//!     Ok(())
-//! }
-//! ```
-//! 
-//! ### 2. 使用默认客户端
+//! ### 1. 使用默认客户端(推荐)
 //! 
 //! ```rust
 //! use msr_api_rs::MSRApiClient;
@@ -46,6 +27,23 @@
 //! }
 //! ```
 //! 
+//! ### 2. 作为库直接调用API
+//! 
+//! ```rust
+//! use msr_api_rs::client::remote::RemoteApiClient;
+//! 
+//! #[tokio::main]
+//! async fn main() -> Result<(), Box<dyn std::error::Error>> {
+//!     // 创建API客户端
+//!     let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
+//!     
+//!     // 直接调用API方法
+//!     let song = client.get_song("123456".to_string()).await?;
+//!     println!("歌曲名称: {}", song.data.name);
+//!     
+//!     Ok(())
+//! }
+//! ```
 //! ### 3. 作为Web服务使用（需要启用web feature）
 //! 
 //! ```rust
@@ -54,7 +52,7 @@
 //! 
 //! #[tokio::main]
 //! async fn main() -> Result<(), Box<dyn std::error::Error>> {
-//!     let client = RemoteApiClient::new("https://your-api-base.com".to_string());
+//!     let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
 //!     let app = web::routes(client);
 //!     
 //!     // 启动服务器
@@ -66,6 +64,7 @@
 //!     Ok(())
 //! }
 //! ```
+//! 或者直接在本项目下执行`cargo run --bin server --features web`
 //! 
 //! ## Cargo Features
 //! 
@@ -161,7 +160,7 @@ impl MSRApiClient {
     /// 
     /// # 参数
     /// 
-    /// * `last_cid` - 可选参数，用于分页，从指定CID之后开始获取
+    /// * `last_cid` - 可选参数，用于分页，从指定cid之后开始获取
     pub async fn get_all_news(&self, last_cid: Option<String>) -> Result<SearchNewsResp, AppError> {
         self.inner.get_all_news(last_cid).await
     }

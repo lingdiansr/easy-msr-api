@@ -1,14 +1,12 @@
 # MSR API Rust 封装库
 
-这是一个为MSR API提供Rust封装的库，支持直接API调用、Web服务集成，以及可选的Swagger UI文档。
+这是一个为MSR API提供Rust封装的库，支持直接API调用以及可选的Swagger UI文档。
 
 ## 功能特性
 
 - **核心API封装**：完整的MSR API功能封装，可直接调用
-- **可选Web路由**：提供Axum Web路由集成
 - **可选Swagger UI**：通过feature控制是否启用Swagger文档界面
 - **类型安全**：完整的DTO类型定义
-- **灵活使用**：支持直接API调用和Web服务两种模式
 
 ## 使用方式
 
@@ -22,7 +20,7 @@ use msr_api_rs::client::remote::RemoteApiClient;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 创建API客户端
-    let client = RemoteApiClient::new("https://your-api-base.com".to_string());
+    let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
     
     // 直接调用API方法 - 无需Web路由
     let song = client.get_song("123456".to_string()).await?;
@@ -40,45 +38,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 2. 作为Web服务使用
-
-#### 基础Web路由（无Swagger UI）
-```rust
-use msr_api_rs::{client::remote::RemoteApiClient, web};
-use std::net::Ipv4Addr;
-
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let client = RemoteApiClient::new("https://your-api-base.com".to_string());
-    let app = web::routes(client);
-    
-    // 启动服务器
-    let listener = tokio::net::TcpListener::bind((Ipv4Addr::LOCALHOST, 8080)).await?;
-    println!("服务器运行在 http://localhost:8080");
-    axum::serve(listener, app).await?;
-    
-    Ok(())
-}
-```
+### 2. 作为Swagger UI服务使用
 
 #### 带Swagger UI的Web路由
 ```rust
 use msr_api_rs::{client::remote::RemoteApiClient, web};
 
-let client = RemoteApiClient::new("https://your-api-base.com".to_string());
+let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
 let app = web::routes_with_swagger(client); // 需要启用swagger-ui feature
 ```
 
 ### 3. 作为独立服务运行
 
-#### 默认模式（无Swagger UI）
-```bash
-cargo run --bin server
-```
-
 #### 启用Swagger UI模式
 ```bash
-cargo run --features swagger-ui --bin server
+cargo run --features web --bin server
 ```
 
 ## 可用的API方法
@@ -107,7 +81,7 @@ cargo run --features swagger-ui --bin server
 ## Cargo Features
 
 - **default**: 无额外功能，仅包含核心API封装
-- **swagger-ui**: 启用Swagger UI界面支持（用于Web服务）
+- **web**: 启用Swagger UI界面支持（用于Web服务）
 
 ## 项目结构
 
@@ -124,20 +98,13 @@ src/
 └── lib.rs          # 库入口
 ```
 
-## 使用场景对比
-
-| 使用方式 | 适用场景 | 代码示例 |
-|----------|----------|----------|
-| **直接API调用** | 其他Rust库、CLI工具、后台服务 | `client.get_song("123")` |
-| **Web路由** | RESTful API服务、微服务 | `web::routes(client)` |
-| **带Swagger的Web** | 开发调试、API文档展示 | `web::routes_with_swagger(client)` |
 
 ## 环境变量
 
 创建`.env`文件：
 ```bash
 SERVER_PORT=8080
-REMOTE_BASE=https://api.example.com
+REMOTE_BASE=https://monster-siren.hypergryph.com/api
 ```
 
 ## 快速开始
@@ -145,19 +112,19 @@ REMOTE_BASE=https://api.example.com
 1. **添加到Cargo.toml**：
 ```toml
 [dependencies]
-msr-api-rs = { path = "path/to/msr-api-rs" }
+msr-api-rs = "0.1.0"
 ```
 
 2. **直接API调用**：
 ```rust
 use msr_api_rs::client::remote::RemoteApiClient;
 
-let client = RemoteApiClient::new("https://api.example.com".to_string());
+let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
 let song = client.get_song("123456".to_string()).await?;
 ```
 
 3. **Web服务**（可选）：
 ```rust
 use msr_api_rs::{client::remote::RemoteApiClient, web};
-let client = RemoteApiClient::new("https://api.example.com".to_string());
+let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
 let app = web::routes(client);
