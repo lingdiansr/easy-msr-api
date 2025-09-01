@@ -1,11 +1,21 @@
+//! # 请求处理器
+//! 
+//! 定义了所有HTTP端点的请求处理函数。
+//! 
+//! 每个处理函数都对应一个特定的API端点，负责接收请求、调用远程API并返回响应。
+//! 所有处理函数都使用`utoipa`进行OpenAPI文档注解。
+
 use crate::client::remote::RemoteApiClient;
 use crate::error::AppError;
-use crate::web::dto::*;
+use crate::dto::*;
 use axum::{
     Json,
     extract::{Path, Query, State},
 };
 
+/// 获取歌曲详情
+/// 
+/// 根据歌曲cid获取歌曲的详细信息，包括音频文件URL、歌词URL等。
 #[utoipa::path(
     get,
     path="/song/{cid}",
@@ -24,6 +34,9 @@ pub async fn get_song(
     client.get_song(cid).await.map(Json)
 }
 
+/// 获取所有歌曲列表
+/// 
+/// 获取所有歌曲的基本信息列表，不包含音频文件URL等详细信息。
 #[utoipa::path(
     get,
     path="/songs",
@@ -38,6 +51,9 @@ pub async fn get_all_songs(
     client.get_all_songs().await.map(Json)
 }
 
+/// 获取专辑信息
+/// 
+/// 根据专辑cid获取专辑的基本信息。
 #[utoipa::path(
     get,
     path="/album/{cid}/data",
@@ -56,6 +72,9 @@ pub async fn get_album(
     client.get_album(cid).await.map(Json)
 }
 
+/// 获取专辑详情
+/// 
+/// 根据专辑cid获取专辑的详细信息，包括专辑中的所有歌曲列表。
 #[utoipa::path(
     get,
     path="/album/{cid}/detail",
@@ -74,6 +93,9 @@ pub async fn get_album_detail(
     client.get_album_detail(cid).await.map(Json)
 }
 
+/// 获取所有专辑列表
+/// 
+/// 获取所有专辑的基本信息列表。
 #[utoipa::path(
     get,
     path="/albums",
@@ -88,6 +110,9 @@ pub async fn get_all_albums(
     client.get_all_albums().await.map(Json)
 }
 
+/// 综合搜索
+/// 
+/// 同时搜索专辑和新闻，返回综合搜索结果。
 #[utoipa::path(
     get,
     path="/search",
@@ -105,6 +130,10 @@ pub async fn search(
 ) -> Result<Json<SearchResp>, AppError> {
     client.search(q.keyword).await.map(Json)
 }
+
+/// 搜索专辑
+/// 
+/// 根据关键词搜索专辑，支持分页。
 #[utoipa::path(
     get,
     path="/search/album",
@@ -124,6 +153,9 @@ pub async fn search_albums(
     client.search_albums(q.keyword, q.last_cid).await.map(Json)
 }
 
+/// 搜索新闻
+/// 
+/// 根据关键词搜索新闻，支持分页。
 #[utoipa::path(
     get,
     path="/search/news",
@@ -143,6 +175,9 @@ pub async fn search_news(
     client.search_news(q.keyword, q.last_cid).await.map(Json)
 }
 
+/// 获取所有新闻列表
+/// 
+/// 获取所有新闻的基本信息列表，支持分页。
 #[utoipa::path(
     get,
     path="/news",
@@ -161,6 +196,9 @@ pub async fn get_all_news(
     client.get_all_news(q.last_cid).await.map(Json)
 }
 
+/// 获取新闻详情
+/// 
+/// 根据新闻cid获取新闻的详细内容。
 #[utoipa::path(
     get,
     path="/news/{cid}",
@@ -179,6 +217,9 @@ pub async fn get_news_detail(
     client.get_news_detail(cid).await.map(Json)
 }
 
+/// 获取字体配置
+/// 
+/// 获取字体文件的配置信息，包括不同格式的字体文件URL。
 #[utoipa::path(
     get,
     path="/fontset",
@@ -189,6 +230,6 @@ pub async fn get_news_detail(
 )]
 pub async fn get_font(
     State(client): State<RemoteApiClient>
-)->Result<Json<FontResp>,AppError>{
+) -> Result<Json<FontResp>, AppError> {
     client.get_font().await.map(Json)
 }
