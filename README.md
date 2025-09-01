@@ -86,16 +86,33 @@ cargo run --features web --bin server
 ## 项目结构
 
 ```
-src/
-├── client/
-│   └── remote.rs   # 核心API封装，可直接调用
-├── web/            # Web路由层（可选）
-│   ├── handler.rs  # 请求处理器
-│   ├── dto.rs      # 数据传输对象
-│   └── docs.rs     # OpenAPI文档
-├── config.rs       # 配置管理
-├── error.rs        # 错误处理
-└── lib.rs          # 库入口
+msr-api
+├── Cargo.lock
+├── Cargo.toml
+├── examples                        # 示例项目
+│   ├── msr-api-hello-lib           # 作为lib使用
+│   │   ├── Cargo.toml
+│   │   └── src
+│   │       └── main.rs
+│   └── msr-api-hello-swagger-ui    # 作为swagger-ui使用
+│       ├── Cargo.toml
+│       └── src
+│           └── main.rs
+├── README.md
+└── src
+    ├── bin                         # 启动swagger-ui
+    │   └── server.rs
+    ├── client                      # api封装
+    │   └── remote.rs
+    ├── client.rs
+    ├── config.rs                   # 配置管理
+    ├── dto.rs                      # 相应、查询结构体
+    ├── error.rs                    # 错误处理
+    ├── lib.rs              
+    ├── web                         # web处理
+    │   ├── docs.rs                 # OpenAPI文档
+    │   └── handler.rs              # 请求处理器
+    └── web.rs
 ```
 
 
