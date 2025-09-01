@@ -63,4 +63,4 @@ jobs:
 
       # 6. 发布到 crates.io
       - name: Publish to crates.io
-        run: cargo publish --token ${{ steps.auth.outputs.token }}
+        run: cargo publish --allow-dirty --token ${{ steps.auth.outputs.token }}
