@@ -1,0 +1,66 @@
+name: Release & Publish to crates.io
+
+on:
+  push:
+    tags:
+      - 'v*'   # 仅当推送 v* 标签时触发
+
+env:
+  # 让 Rust 工具链使用稳定版
+  RUST_TOOLCHAIN: stable
+
+jobs:
+  release:
+    name: Create GitHub Release & Publish to crates.io
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # 用于创建 Release
+      id-token: write  # OIDC 授权，用于 crates-io-auth-action
+
+    steps:
+      # 1. 检出代码
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # 需要完整历史才能生成 changelog
+
+      # 2. 安装 Rust
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ env.RUST_TOOLCHAIN }}
+
+      # 3. 使用 OIDC 获取 crates.io 发布 token
+      - name: Authenticate to crates.io
+        id: auth
+        uses: rust-lang/crates-io-auth-action@v1
+
+      # 4. 安装并运行 git-cliff
+      - name: Install git-cliff
+        run: cargo install git-cliff --locked
+
+      - name: Generate Release Notes
+        id: changelog
+        run: |
+          git cliff --latest --strip all > RELEASE_NOTES.md
+          {
+            echo 'release_body<<EOF'
+            cat RELEASE_NOTES.md
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      # 5. 创建 GitHub Release
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body: ${{ steps.changelog.outputs.release_body }}
+          draft: false
+          prerelease: false
+          generate_release_notes: false  # 我们已用 git-cliff 生成
+
+      # 6. 发布到 crates.io
+      - name: Publish to crates.io
+        run: cargo publish --token ${{ steps.auth.outputs.token }}
