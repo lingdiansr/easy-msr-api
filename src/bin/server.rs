@@ -1,4 +1,4 @@
-use msr_api::{client::remote::RemoteApiClient, config::Config, web};
+use easy_msr_api::{client::remote::RemoteApiClient, config::Config, web};
 use tracing::info;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 #[tokio::main]

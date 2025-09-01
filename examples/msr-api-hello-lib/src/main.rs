@@ -1,5 +1,5 @@
 // 直接API调用示例 - 不通过Web路由
-use msr_api::MSRApiClient;
+use easy_msr_api::MSRApiClient;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

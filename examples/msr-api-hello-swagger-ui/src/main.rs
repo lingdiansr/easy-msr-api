@@ -1,4 +1,4 @@
-use msr_api::{client::remote::RemoteApiClient, web};
+use easy_msr_api::{client::remote::RemoteApiClient, web};
 use std::net::Ipv4Addr;
 
 #[tokio::main]

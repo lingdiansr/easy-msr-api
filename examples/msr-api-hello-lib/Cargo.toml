@@ -1,8 +1,8 @@
 [package]
-name = "msr-api-hello-lib"
+name = "easy-msr-api-hello-lib"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
 tokio = "1.47.1"
-msr-api = {path = "../../"}
+easy-msr-api = {path = "../../"}

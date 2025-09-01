@@ -1,9 +1,9 @@
 [package]
-name = "msr-api-hello-swagger-ui"
+name = "easy-msr-api-hello-swagger-ui"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
 axum = "0.8.4"
-msr-api = { path = "../../", features = ["web"] }
+easy-msr-api = { path = "../../", features = ["web"] }
 tokio = "1.47.1"

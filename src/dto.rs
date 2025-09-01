@@ -42,7 +42,7 @@ impl<T> ApiResp<T> {
     /// # 示例
     /// 
     /// ```rust
-    /// use msr_api::web::dto::ApiResp;
+    /// use easy_msr_api::web::dto::ApiResp;
     /// 
     /// let resp = ApiResp::success("Hello, World!");
     /// assert_eq!(resp.code, 0);
@@ -64,7 +64,7 @@ impl<T> ApiResp<T> {
     /// # 示例
     /// 
     /// ```rust
-    /// use msr_api::web::dto::ApiResp;
+    /// use easy_msr_api::web::dto::ApiResp;
     /// 
     /// let resp: ApiResp<String> = ApiResp::error("参数错误".to_string());
     /// assert_eq!(resp.code, -1);

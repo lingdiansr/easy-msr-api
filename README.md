@@ -15,7 +15,7 @@
 这是最主要的使用方式，可以直接在其他库或应用中调用API：
 
 ```rust
-use msr_api::client::remote::RemoteApiClient;
+use easy_msr_api::client::remote::RemoteApiClient;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -42,7 +42,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 #### 带Swagger UI的Web路由
 ```rust
-use msr_api::{client::remote::RemoteApiClient, web};
+use easy_msr_api::{client::remote::RemoteApiClient, web};
 
 let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
 let app = web::routes_with_swagger(client); // 需要启用swagger-ui feature
@@ -86,15 +86,15 @@ cargo run --features web --bin server
 ## 项目结构
 
 ```
-msr-api
+easy-msr-api
 ├── Cargo.lock
 ├── Cargo.toml
 ├── examples                        # 示例项目
-│   ├── msr-api-hello-lib           # 作为lib使用
+│   ├── easy-msr-api-hello-lib           # 作为lib使用
 │   │   ├── Cargo.toml
 │   │   └── src
 │   │       └── main.rs
-│   └── msr-api-hello-swagger-ui    # 作为swagger-ui使用
+│   └── easy-msr-api-hello-swagger-ui    # 作为swagger-ui使用
 │       ├── Cargo.toml
 │       └── src
 │           └── main.rs
@@ -129,12 +129,12 @@ REMOTE_BASE=https://monster-siren.hypergryph.com/api
 1. **添加到Cargo.toml**：
 ```toml
 [dependencies]
-msr-api = "0.1.0"
+easy-msr-api = "0.1.0"
 ```
 
 2. **直接API调用**：
 ```rust
-use msr_api::client::remote::RemoteApiClient;
+use easy_msr_api::client::remote::RemoteApiClient;
 
 let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
 let song = client.get_song("123456".to_string()).await?;
@@ -142,7 +142,7 @@ let song = client.get_song("123456".to_string()).await?;
 
 3. **Web服务**（可选）：
 ```rust
-use msr_api::{client::remote::RemoteApiClient, web};
+use easy_msr_api::{client::remote::RemoteApiClient, web};
 let client = RemoteApiClient::new("https://monster-siren.hypergryph.com/api".to_string());
 let app = web::routes(client);
 ```
