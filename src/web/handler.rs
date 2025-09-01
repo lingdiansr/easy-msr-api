@@ -7,7 +7,7 @@
 
 use crate::client::remote::RemoteApiClient;
 use crate::error::AppError;
-use crate::web::dto::*;
+use crate::dto::*;
 use axum::{
     Json,
     extract::{Path, Query, State},

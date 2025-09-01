@@ -6,7 +6,7 @@
 //! 所有结构体都实现了`Serialize`、`Deserialize`和`ToSchema` trait。
 
 use serde::{Deserialize, Serialize};
-use utoipa::{IntoParams, ToSchema};
+use utoipa::{schema,IntoParams, ToSchema};
 
 /// 统一的API响应格式
 /// 

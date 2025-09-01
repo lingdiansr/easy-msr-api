@@ -6,7 +6,7 @@
 //! 所有MSR API的调用方法。
 
 use crate::error::AppError;
-use crate::web::dto::*;
+use crate::dto::*;
 use reqwest::{Client, ClientBuilder};
 use std::time::Duration;
 

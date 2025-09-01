@@ -5,8 +5,7 @@
 //! ## 功能特性
 //! 
 //! - **核心API封装**：完整的MSR API功能封装，可直接调用
-//! - **可选Web路由**：提供Axum Web路由集成
-//! - **可选Swagger UI**：通过feature控制是否启用Swagger文档界面
+//! - **可选Web路由**：提供Axum Web路由集成，包含Swagger UI文档界面
 //! - **类型安全**：完整的DTO类型定义
 //! - **灵活使用**：支持直接API调用和Web服务两种模式
 //! 
@@ -47,7 +46,7 @@
 //! }
 //! ```
 //! 
-//! ### 3. 作为Web服务使用
+//! ### 3. 作为Web服务使用（需要启用web feature）
 //! 
 //! ```rust
 //! use msr_api_rs::{client::remote::RemoteApiClient, web};
@@ -61,6 +60,7 @@
 //!     // 启动服务器
 //!     let listener = tokio::net::TcpListener::bind((Ipv4Addr::LOCALHOST, 8080)).await?;
 //!     println!("服务器运行在 http://localhost:8080");
+//!     println!("Swagger UI文档: http://localhost:8080/swagger-ui/");
 //!     axum::serve(listener, app).await?;
 //!     
 //!     Ok(())
@@ -70,33 +70,33 @@
 //! ## Cargo Features
 //! 
 //! - **default**: 无额外功能，仅包含核心API封装
-//! - **swagger-ui**: 启用Swagger UI界面支持（用于Web服务）
+//! - **web**: 启用Web路由和Swagger UI界面支持
 //! 
 //! ## 模块结构
 //! 
 //! - [`client`] - API客户端实现
 //! - [`config`] - 配置管理
 //! - [`error`] - 错误处理
-//! - [`web`] - Web路由层（可选）
+//! - [`web`] - Web路由层（需要启用web feature）
 
 pub mod client;
 pub mod config;
 pub mod error;
+pub mod dto;
+
+#[cfg(feature = "web")]
 pub mod web;
 
-#[cfg(not(feature = "swagger-ui"))]
-use crate::{client::remote::RemoteApiClient, web::dto::*, error::AppError};
+use crate::{client::remote::RemoteApiClient, dto::*, error::AppError};
 
 /// 默认的MSR API客户端，使用官方API地址
 /// 
 /// 这个客户端提供了对MSR API的完整封装，使用官方的API地址作为默认配置。
 /// 支持所有主要的API调用，包括歌曲、专辑、新闻和搜索功能。
-#[cfg(not(feature = "swagger-ui"))]
 pub struct MSRApiClient {
     inner: RemoteApiClient,
 }
 
-#[cfg(not(feature = "swagger-ui"))]
 impl MSRApiClient {
     /// 创建默认的MSR API客户端，使用官方API地址
     /// 

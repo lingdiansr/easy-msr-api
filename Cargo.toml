@@ -5,7 +5,7 @@ edition = "2024"
 
 [features]
 default = []
-swagger-ui = ["dep:utoipa-swagger-ui"]
+web = ["dep:utoipa-swagger-ui"]
 
 [dependencies]
 anyhow = "1.0.99"
@@ -20,7 +20,7 @@ tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
 url = "2.5.4"
 urlencoding = "2.1.3"
-utoipa = "5.4.0"
+utoipa = "5.4.0" 
 utoipa-swagger-ui = { version = "9.0.2", features = ["axum"], optional = true }
 
 [dev-dependencies]

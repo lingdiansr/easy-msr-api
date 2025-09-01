@@ -5,7 +5,7 @@
 //! 使用`utoipa`库生成OpenAPI 3.0规范文档，支持Swagger UI集成。
 //! 仅在启用`swagger-ui` feature时才会被使用。
 
-use crate::web::dto::*;
+use crate::dto::*;
 use crate::web::handler::*;
 use utoipa::OpenApi;
 
