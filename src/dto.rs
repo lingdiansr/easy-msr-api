@@ -12,7 +12,7 @@ use utoipa::{schema,IntoParams, ToSchema};
 /// 
 /// 所有API响应都使用这个统一的格式包装。
 /// 包含状态码、消息和实际数据。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct ApiResp<T> {
     /// 响应状态码
     /// 
@@ -84,7 +84,7 @@ impl<T> ApiResp<T> {
 /// 歌曲数据
 /// 
 /// 包含歌曲的完整信息，包括音频文件URL、歌词URL等。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct SongData {
     /// 歌曲唯一标识符（cid）
     #[serde(rename = "cid")]
@@ -128,7 +128,7 @@ pub type SongResp = ApiResp<SongData>;
 /// 所有歌曲列表单项
 /// 
 /// 简化版的歌曲信息，用于列表展示。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct AllSongsItem {
     /// 歌曲唯一标识符（cid）
     #[serde(rename = "cid")]
@@ -149,7 +149,7 @@ pub struct AllSongsItem {
 }
 
 /// 所有歌曲数据
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct AllSongsData {
     /// 歌曲列表
     pub list: Vec<AllSongsItem>,
@@ -166,7 +166,7 @@ pub type AllSongsResp = ApiResp<AllSongsData>;
 /// 专辑数据
 /// 
 /// 包含专辑的基本信息。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct AlbumData {
     /// 专辑唯一标识符（cid）
     #[serde(rename = "cid")]
@@ -206,7 +206,7 @@ pub type AlbumResp = ApiResp<AlbumData>;
 /// 专辑详情中的歌曲项
 /// 
 /// 专辑详情中包含的简化歌曲信息。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct AlbumDetailSongItem {
     /// 歌曲唯一标识符（cid）
     #[serde(rename = "cid")]
@@ -225,7 +225,7 @@ pub struct AlbumDetailSongItem {
 /// 专辑详情数据
 /// 
 /// 包含专辑的完整信息和歌曲列表。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct AlbumDetailData {
     /// 专辑唯一标识符（cid）
     #[serde(rename = "cid")]
@@ -264,7 +264,7 @@ pub type AlbumDetailResp = ApiResp<AlbumDetailData>;
 /// 所有专辑列表单项
 /// 
 /// 简化版的专辑信息，用于列表展示。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct AllAlbumsItem {
     /// 专辑唯一标识符（cid）
     #[serde(rename = "cid")]
@@ -288,7 +288,7 @@ pub struct AllAlbumsItem {
 /// 搜索结果中的专辑项
 /// 
 /// 搜索结果中的专辑信息。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct SearchAlbumItem {
     /// 专辑唯一标识符（cid）
     #[serde(rename = "cid")]
@@ -314,7 +314,7 @@ pub struct SearchAlbumItem {
 }
 
 /// 搜索结果中的专辑数据
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct SearchAlbumData {
     /// 专辑列表
     pub list: Vec<SearchAlbumItem>,
@@ -340,7 +340,7 @@ pub type SearchAlbumResp = ApiResp<SearchAlbumData>;
 /// 新闻项
 /// 
 /// 简化版的新闻信息，用于列表展示。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct NewsItem {
     /// 新闻唯一标识符（cid）
     #[serde(rename = "cid")]
@@ -358,7 +358,7 @@ pub struct NewsItem {
 }
 
 /// 新闻数据
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct NewsData {
     /// 新闻列表
     pub list: Vec<NewsItem>,
@@ -399,7 +399,7 @@ pub struct SearchQuery {
 /// 搜索结果数据
 /// 
 /// 包含专辑和新闻的搜索结果。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct SearchData {
     /// 专辑搜索结果
     pub albums: SearchAlbumData,
@@ -414,7 +414,7 @@ pub type SearchResp = ApiResp<SearchData>;
 /// 新闻详情数据
 /// 
 /// 包含新闻的完整内容。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct NewsDetailData {
     /// 新闻唯一标识符（cid）
     #[serde(rename = "cid")]
@@ -442,7 +442,7 @@ pub type NewsDetailResp = ApiResp<NewsDetailData>;
 /// 字体文件项
 /// 
 /// 包含不同格式的字体文件URL。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct FontItem {
     /// TrueType字体文件URL
     pub tt: String,
@@ -460,7 +460,7 @@ pub struct FontItem {
 /// 字体数据
 /// 
 /// 包含所有可用的字体配置。
-#[derive(Serialize, Deserialize, Debug, ToSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq,ToSchema)]
 pub struct FontData {
     /// 常规无衬线字体
     #[serde(rename = "Sans-Regular")]

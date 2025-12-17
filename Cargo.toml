@@ -1,6 +1,6 @@
 [package]
 name = "easy-msr-api"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 license = "GPL-3.0"
 description = "This is a library that provides Rust encapsulation for the MSR API, supporting direct API calls as well as optional Swagger UI documentation."
