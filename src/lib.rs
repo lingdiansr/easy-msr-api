@@ -213,3 +213,9 @@ impl MSRApiClient {
         self.inner.search_news(keyword, last_cid).await
     }
 }
+
+impl Default for MSRApiClient {
+    fn default() -> Self {
+        Self::new()
+    }
+}
